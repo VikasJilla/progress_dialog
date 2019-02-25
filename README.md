@@ -3,4 +3,3 @@
 A Simple and easy to use flutter package for showing progress bar.
 
 
-
