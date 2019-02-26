@@ -150,6 +150,7 @@ class ProgressDialog {
       print('setting dismiss val $dismissed');
       isDismissed = dismissed;
     });
+    if(dismissAfter == null)return;
     Future.delayed(dismissAfter, () {
       print('calling dismiss prog');
       dismissProgressDialog(context);

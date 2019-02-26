@@ -22,6 +22,7 @@ showing progress dialog
 _progressDialog.showProgressDialog(context,dismissAfter: Duration(seconds: 5),textToBeDisplayed:'Sending...',onDismiss:(){
 	//things to do after dismissing -- optional
 });
+dismissAfter - if null then progress dialog won't dismiss until dismissProgressDialog is called from the code.
 ```
 
 dismiss progressDialog
