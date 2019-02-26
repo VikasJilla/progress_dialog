@@ -4,6 +4,7 @@ A Simple and easy to use flutter package for showing progress bar.
 
 
 #Usage
+
 Import the package
 ```
 import 'package:custom_progress_dialog/custom_progress_dialog.dart';
