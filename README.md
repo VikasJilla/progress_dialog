@@ -30,3 +30,7 @@ dismiss progressDialog
 ```
 _progressDialog.dismissProgressDialog(context);
 ```
+
+## Preview:
+
+![](example/images/pdialog.gif)
