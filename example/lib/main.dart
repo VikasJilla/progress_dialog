@@ -33,8 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Progress Dialog Demo"),
       ),
-      body: Center(
-        
+      body: Center(        
         child: Wrap(
           alignment: WrapAlignment.center,
           spacing: 10,
@@ -45,7 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Show Progress'),
             ),
-          
           ],
         ),
       ), 
