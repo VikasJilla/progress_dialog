@@ -1,3 +1,7 @@
+## [1.0.2] - 24/07/2019
+
+* support for box decoration as a parameter
+
 ## [1.0.1] - 02/07/2019
 
 * A simple progress dialog that need not be added to any widget heirarchy

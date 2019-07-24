@@ -4,6 +4,7 @@ library progress_dialog;
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
@@ -106,7 +107,8 @@ class ProgressDialog {
       Color barrierColor = const Color(0x55222222),
       String textToBeDisplayed,
       Duration dismissAfter,
-      Function onDismiss
+      Function onDismiss,
+      BoxDecoration decoration
     })
   {
     isDismissed = false;
@@ -116,7 +118,7 @@ class ProgressDialog {
       pageBuilder: (context, animation1, animation2) {
         return CustomProgressDialog(
           child: Container(
-              decoration: new BoxDecoration(
+              decoration:decoration?? new BoxDecoration(
                   color: Colors.black,
                   borderRadius: new BorderRadius.all(new Radius.circular(0))),
               padding: EdgeInsets.all(10),
