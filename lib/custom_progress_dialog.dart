@@ -91,14 +91,16 @@ class CustomProgressDialog extends StatelessWidget {
 
 //the code below is writeen by Vikas-Jilla and the above code is from existing material dialog library
 class ProgressDialog {
-  bool isDismissed = false;
-  var lock = new Lock();
-  void dismissProgressDialog(BuildContext context) async {
+ bool isDismissed = true;
+  var lock = Lock();
+  Timer _timer;
+  Future<void> dismissProgressDialog(BuildContext context) async {
+    _timer?.cancel();
     await lock.synchronized(() async {
       if (isDismissed) {
-        print('progress already dismissed');
         return;
       }
+      isDismissed = true;
       Navigator.of(context, rootNavigator: true).pop(true);
     });
   }
@@ -106,31 +108,31 @@ class ProgressDialog {
   void showProgressDialog(BuildContext context,{
       Color barrierColor = const Color(0x55222222),
       String textToBeDisplayed,
-      Duration dismissAfter,
-      Function onDismiss,
-      BoxDecoration decoration
+      Duration dismissAfter =const Duration(seconds: 5),
+      Function onDismiss
     })
   {
-    isDismissed = false;
-    showGeneralDialog(
-      context: context,
-      barrierColor: barrierColor,
-      pageBuilder: (context, animation1, animation2) {
-        return CustomProgressDialog(
-          child: Container(
-              decoration:decoration?? new BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: new BorderRadius.all(new Radius.circular(0))),
-              padding: EdgeInsets.all(10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Platform.isIOS
+    dismissProgressDialog(context).then((_){
+      isDismissed = false;
+      showGeneralDialog(
+        context: context,
+        barrierColor: barrierColor,
+        pageBuilder: (context, animation1, animation2) {
+          return CustomProgressDialog(
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: const BorderRadius.all(Radius.circular(5))),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children:  <Widget>[
+                    Platform.isIOS
                       ? CupertinoActivityIndicator(
                           radius: 15,
                         )
                       : CircularProgressIndicator(),
-                  textToBeDisplayed == null
+                    textToBeDisplayed == null
                       ? Padding(
                           padding: EdgeInsets.all(0),
                         )
@@ -142,22 +144,23 @@ class ProgressDialog {
                           textAlign: TextAlign.center,
                         )
                       )
-                ],
-              )),
-        );
-      },
-      barrierDismissible: false,
-      transitionDuration: Duration(milliseconds: 100),
-    ).then((dismissed) {
-      print('setting dismiss val $dismissed');
-      isDismissed = dismissed;
+                  ]
+                )),
+          );
+        },
+        barrierDismissible: false,
+        transitionDuration: const Duration(milliseconds: 100),
+      ).then((dismissed) {
+        isDismissed = dismissed;
+      });
+      if(dismissAfter == null)return;
+      _timer = Timer(dismissAfter,() {
+        dismissProgressDialog(context);
+        if (onDismiss != null) onDismiss();
+      });
     });
-    if(dismissAfter == null)return;
-    Future.delayed(dismissAfter, () {
-      print('calling dismiss prog');
-      dismissProgressDialog(context);
-      if (onDismiss != null) onDismiss();
-    });
+    
   }
+
 }
 
