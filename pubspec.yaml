@@ -1,6 +1,6 @@
 name: custom_progress_dialog
 description:  Simple and easy to use flutter package for showing progress bar, without the need of adding it to any widget.With just two calls show and dismiss, you can control it.
-version: 1.0.3
+version: 1.0.4
 author: Vikas Jilla <jillavikas@gmail.com>
 homepage: https://github.com/VikasJilla/progress_dialog
 

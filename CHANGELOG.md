@@ -1,3 +1,7 @@
+## [1.0.4] - 01/03/2020
+
+* Handling back press
+
 ## [1.0.3] - 09/11/2019
 
 * Updated to using Timer for dismissing after the duration that is set. If no duration is set, then shows the dialog infinitely until dismissed using dismissProgressDialog(..)
